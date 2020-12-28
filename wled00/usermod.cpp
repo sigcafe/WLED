@@ -51,8 +51,14 @@ void userSetup()
     }
     Serial.println("I2S driver installed.");
 
-  delay(100);
+  // according to the nnmp441 datasheet, the chips need 2^18 SCK clock cycles to become operational.
+  // sck is is sample_rate(Hz) X bits_per_sample X channels
+  // for the defaults 32bit/10240hz/2 channel this results in a SCLK of 655Khz
+  // IDF 3.3 exposes i2s_get_clk 
 
+  uint16_t inmp441_setup_time_ms = (INMP441_SETUP_CYCLES*1000) / (i2s_config.sample_rate * i2s_config.bits_per_sample * 2);
+
+  delay(inmp441_setup_time_ms); 
 
   // Test to see if we have a digital microphone installed or not.
 

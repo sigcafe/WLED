@@ -15,6 +15,9 @@
  #define I2S_SD 32        // aka DOUT
  #define I2S_SCK 14       // aka BCLK
 
+// INMP441 needs this amount of cycles to become operational
+ #define INMP441_SETUP_CYCLES 262144 // 2^18
+
 #ifdef ESP32
   #include <driver/i2s.h>
   const i2s_port_t I2S_PORT = I2S_NUM_0;
@@ -310,8 +313,7 @@ void agcAvg() {                                                     // A simple 
 
 #endif
 
-void logAudio() {
-
+void logAudio() { 
 #ifdef MIC_SAMPLING_LOG
   //------------ Oscilloscope output ---------------------------
     Serial.print(targetAgc); Serial.print(" ");
