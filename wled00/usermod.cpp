@@ -56,7 +56,7 @@ void userSetup()
   // for the default 32bit/10240hz/2 channels this result in a SCLK of 655Khz
   // IDF 3.3 exposes i2s_get_clk
 
-  unit16_t inmp441_setup_time_ms = (INMP441_SETUP_CYCLES*1000) / (i2s_config.sample_rate * i2s_config.bits_per_sample * 2);
+  uint16_t inmp441_setup_time_ms = (INMP441_SETUP_CYCLES*1000) / (i2s_config.sample_rate * i2s_config.bits_per_sample * 2);
 
   delay(inmp441_setup_time_ms);
 
