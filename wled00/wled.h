@@ -3,12 +3,12 @@
 /*
    Main sketch, global variable declarations
    @title WLED project sketch
-   @version 0.11.0
+   @version 0.11.1
    @author Christian Schwinne
  */
 
 // version code in format yymmddb (b = daily build)
-#define VERSION 2011290
+#define VERSION 2012180
 
 //uncomment this if you have a "my_config.h" file you'd like to use
 //#define WLED_USE_MY_CONFIG
@@ -22,6 +22,10 @@
 // You are required to disable over-the-air updates:
 //#define WLED_DISABLE_OTA         // saves 14kb
 
+#ifndef ESP32
+  #error This sound reactive branch no longer supports the ESP8266. Please try https://github.com/atuline/WLED/tree/ESP8266.
+#endif
+
 // You need to choose some of these features to disable:
 #define WLED_DISABLE_ALEXA         // saves 11kb
 #define WLED_DISABLE_BLYNK         // saves 6kb
@@ -31,7 +35,7 @@
 #ifndef WLED_DISABLE_MQTT
   #define WLED_ENABLE_MQTT         // saves 12kb
 #endif
-#define WLED_ENABLE_ADALIGHT       // saves 500b only
+//#define WLED_ENABLE_ADALIGHT     // saves 500b only
 //#define WLED_ENABLE_DMX          // uses 3.5kb (use LEDPIN other than 2)
 //#define WLED_ENABLE_LOXONE       // uses 1.2kb
 #ifndef WLED_DISABLE_WEBSOCKETS
@@ -174,7 +178,7 @@
 #endif
 
 // Global Variable definitions
-WLED_GLOBAL char versionString[] _INIT("0.11.0");
+WLED_GLOBAL char versionString[] _INIT("0.11.1");
 #define WLED_CODENAME "Mirai"
 
 // AP and OTA default passwords (for maximum security change them!)

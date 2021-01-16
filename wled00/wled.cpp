@@ -192,6 +192,7 @@ void WLED::loop()
     }
     lastWifiState = WiFi.status();
     DEBUG_PRINT("State time: ");    DEBUG_PRINTLN(wifiStateChangedTime);
+    DEBUG_PRINT("WiFi running on core: "); DEBUG_PRINTLN(xPortGetCoreID());
     DEBUG_PRINT("NTP last sync: "); DEBUG_PRINTLN(ntpLastSyncTime);
     DEBUG_PRINT("Client IP: ");     DEBUG_PRINTLN(Network.localIP());
     DEBUG_PRINT("Loops/sec: ");     DEBUG_PRINTLN(loops / 10);
@@ -386,6 +387,8 @@ void WLED::initAP(bool resetAP)
       udpSyncConnected = fftUdp.beginMulticast(WiFi.localIP(), IPAddress(239, 0, 0, 1), audioSyncPort);
     #endif
     }
+    e131.begin(false, e131Port, e131Universe, E131_MAX_UNIVERSE_COUNT);
+
     dnsServer.setErrorReplyCode(DNSReplyCode::NoError);
     dnsServer.start(53, "*", WiFi.softAPIP());
   }
